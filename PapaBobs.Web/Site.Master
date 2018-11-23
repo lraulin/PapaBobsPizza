@@ -1,0 +1,62 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="PapaBobs.Web.Layout" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <asp:HyperLink ID="brandLink" NavigateUrl="~/Default.aspx" CssClass="navbar-brand" runat="server">Papa Bob's Pizza</asp:HyperLink>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <%--  <li>
+                                <asp:HyperLink ID="orderManagementLink" NavigateUrl="~/OrderManagement.aspx" runat="server">Order Management</asp:HyperLink>
+                            </li>--%>
+                            <% if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                {%>
+                            <li>
+                                <asp:HyperLink ID="orderFormLink" NavigateUrl="~/MemberPages/OrderForm.aspx" Text="Order" runat="server" />
+                            </li>
+                            <li>
+                                <asp:HyperLink NavigateUrl="~/AdminPages/OrderManagement.aspx" Text="Admin" runat="server" />
+                            </li>
+                            <li>
+                                <asp:LinkButton ID="SignoutLink" Text="Sign Out" runat="server" OnClick="Signout_Click" />
+                            </li>
+                            <%}
+                            else
+                            {%>
+                            <li>
+                                <asp:HyperLink ID="loginLink" NavigateUrl="~/Account/Login.aspx" runat="server" Text="Login" />
+                            </li>
+                            <li>
+                                <asp:HyperLink ID="registerLink" NavigateUrl="~/Account/Register.aspx" runat="server" Text="Register" />
+                            </li>
+                            <%} %>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+    <script src="Scripts/jquery-1.9.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+</body>
+</html>
